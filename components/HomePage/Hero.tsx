@@ -18,7 +18,7 @@ export const Hero = () => {
               {siteConfig.name.split(" ")[1]}
             </h3>
           </div>
-          <p className="mt-2 text-xs sm:pl-2.5 sm:text-lg md:text-2xl">
+          <p className="mt-2 max-w-[85%] text-center leading-normal text-muted-foreground sm:pl-2.5 sm:text-lg sm:leading-7 md:text-start">
             {siteConfig.description}
           </p>
           <Button size={"lg"} className="mt-4 text-lg sm:ml-2.5">
