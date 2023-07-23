@@ -5,6 +5,7 @@ import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { MainNavItems } from "@/lib/nav-items"
 import { cn } from "@/lib/utils"
+import { SiteFooter } from "@/components/Common/site-footer"
 import { SiteHeader } from "@/components/Header/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -33,7 +34,7 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
-      <html lang="en" suppressHydrationWarning>
+      <html className="scroll-smooth" lang="en" suppressHydrationWarning>
         {/* eslint-disable-next-line @next/next/no-head-element */}
         <head />
         <body
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <div className="flex min-h-screen flex-col">
               <SiteHeader items={MainNavItems} />
               <main className="flex-1">{children}</main>
+              <SiteFooter />
             </div>
             <TailwindIndicator />
           </ThemeProvider>

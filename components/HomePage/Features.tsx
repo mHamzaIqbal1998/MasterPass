@@ -2,7 +2,7 @@ import { featureList } from "@/lib/features"
 
 import { AboutCard } from "../Common/AboutCard"
 
-export const About = () => {
+export const Features = () => {
   return (
     <section
       id="features"
