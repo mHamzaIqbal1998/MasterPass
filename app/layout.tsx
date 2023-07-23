@@ -6,6 +6,7 @@ import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { MainNavItems } from "@/lib/nav-items"
 import { cn } from "@/lib/utils"
+import { ScrollToTop } from "@/components/Common/scroll-top"
 import { SiteFooter } from "@/components/Common/site-footer"
 import { SiteHeader } from "@/components/Header/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             </div>
             <TailwindIndicator />
           </ThemeProvider>
+          <ScrollToTop />
           <Analytics />
         </body>
       </html>
