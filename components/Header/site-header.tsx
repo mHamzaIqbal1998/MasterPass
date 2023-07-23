@@ -60,7 +60,9 @@ export function SiteHeader({ items, children }: MainNavProps) {
         </button>
       </>
       {showMobileMenu && items && (
-        <MobileNav items={items}>{children}</MobileNav>
+        <MobileNav items={items} setShowMobileMenu={setShowMobileMenu}>
+          {children}
+        </MobileNav>
       )}
       <ThemeToggle />
     </div>
