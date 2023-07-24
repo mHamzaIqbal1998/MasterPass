@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Lock } from "lucide-react"
 
 import { siteConfig } from "@/config/site"
@@ -21,9 +22,11 @@ export const Hero = () => {
           <p className="mt-2 max-w-[85%] text-center leading-normal text-muted-foreground sm:pl-2.5 sm:text-lg sm:leading-7 md:text-start">
             {siteConfig.description}
           </p>
-          <Button size={"lg"} className="mt-4 text-lg sm:ml-2.5">
-            Get Started
-          </Button>
+          <Link href={"/Login"}>
+            <Button size={"lg"} className="mt-4 text-lg sm:ml-2.5">
+              Get Started
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
