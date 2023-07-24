@@ -1,6 +1,3 @@
-import { redirect } from "next/navigation"
-
-import { getCurrentUser } from "@/lib/session"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
 
@@ -9,14 +6,7 @@ export const metadata = {
   description: "Login to your account",
 }
 
-export const dynamic = "force-dynamic"
-
 export default async function LoginPage() {
-  const user = await getCurrentUser()
-  if (user) {
-    redirect("/dashboard")
-  }
-
   return (
     <section className="space-y-6 pb-8  pt-[25%] sm:pt-[15%] md:pb-12 lg:py-32 lg:pt-[12%]">
       <div className="flex flex-col items-center justify-center lg:flex-row">
