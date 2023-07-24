@@ -6,6 +6,8 @@ export const metadata = {
   title: "Dashboard",
 }
 
+export const dynamic = "force-static"
+
 export default async function Dashboard() {
   const user = await getCurrentUser()
   if (!user) {
