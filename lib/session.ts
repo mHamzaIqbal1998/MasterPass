@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth"
 
-import { authOption } from "./auth"
+import { authOptions } from "./auth"
 
 type USER = {
   name: string
@@ -11,6 +11,6 @@ type SESSION = {
   user: USER
 }
 export async function getCurrentUser() {
-  const session: SESSION = (await getServerSession(authOption)) as SESSION
+  const session: SESSION = (await getServerSession(authOptions)) as SESSION
   return session?.user
 }
