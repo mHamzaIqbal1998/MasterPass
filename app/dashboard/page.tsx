@@ -2,12 +2,14 @@ import { redirect } from "next/navigation"
 
 import { getCurrentUser } from "@/lib/session"
 
-const Dashboard = async () => {
+export const metadata = {
+  title: "Dashboard",
+}
+
+export default async function Dashboard() {
   const user = await getCurrentUser()
   if (!user) {
     redirect("/Login")
   }
   return <div>Dashboard</div>
 }
-
-export default Dashboard
