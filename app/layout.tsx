@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { ScrollToTop } from "@/components/Common/scroll-top"
 import { SiteFooter } from "@/components/Common/site-footer"
 import { SiteHeader } from "@/components/Header/site-header"
+import { AuthProvider } from "@/components/auth-provider"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -45,15 +46,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="flex min-h-screen flex-col">
-              <SiteHeader items={MainNavItems} />
-              <main className="flex-1">{children}</main>
-              <SiteFooter />
-            </div>
-            <TailwindIndicator />
-          </ThemeProvider>
-          <ScrollToTop />
+          <AuthProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <div className="flex min-h-screen flex-col">
+                <SiteHeader items={MainNavItems} />
+                <main className="flex-1">{children}</main>
+                <SiteFooter />
+              </div>
+              <TailwindIndicator />
+            </ThemeProvider>
+            <ScrollToTop />
+          </AuthProvider>
           <Analytics />
         </body>
       </html>

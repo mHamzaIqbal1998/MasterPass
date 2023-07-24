@@ -18,7 +18,6 @@ interface MainNavProps {
 }
 
 export function SiteHeader({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment()
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
   return (
@@ -39,9 +38,6 @@ export function SiteHeader({ items, children }: MainNavProps) {
                 href={item.disabled ? "#" : item.href}
                 className={cn(
                   "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                  item.href.startsWith(`/${segment}`)
-                    ? "text-foreground"
-                    : "text-foreground/60",
                   item.disabled && "cursor-not-allowed opacity-80"
                 )}
               >
