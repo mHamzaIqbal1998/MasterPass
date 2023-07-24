@@ -9,6 +9,8 @@ export const metadata = {
   description: "Login to your account",
 }
 
+export const dynamic = "force-static"
+
 export default async function LoginPage() {
   const user = await getCurrentUser()
   if (user) {
