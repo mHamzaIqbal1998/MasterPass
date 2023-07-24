@@ -1,11 +1,10 @@
-import { Metadata } from "next"
 import { redirect } from "next/navigation"
 
 import { getCurrentUser } from "@/lib/session"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Login",
   description: "Login to your account",
 }
