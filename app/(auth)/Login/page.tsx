@@ -1,6 +1,8 @@
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
 
+export const runtime = "edge"
+
 export const metadata = {
   title: "Login",
   description: "Login to your account",
