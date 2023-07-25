@@ -4,9 +4,6 @@ import GoogleProvider from "next-auth/providers/google"
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
-  // huh any! I know.
-  // This is a temporary fix for prisma client.
-  // @see https://github.com/prisma/prisma/issues/16117
   session: {
     strategy: "jwt",
   },
@@ -26,7 +23,7 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user.id = token.id
+        // session.user.id = token.id
         session.user.name = token.name
         session.user.email = token.email
         session.user.image = token.picture
@@ -49,10 +46,10 @@ export const authOptions: NextAuthOptions = {
       // }
 
       return {
-        id: user.id,
-        name: user.name,
-        email: user.email,
-        picture: user.image,
+        // id: user.id,
+        name: token.name,
+        email: token.email,
+        picture: token.picture,
       }
     },
   },
