@@ -5,5 +5,5 @@ export const dynamic = "force-dynamic"
 export const runtime = "edge"
 
 export default async function Dashboard() {
-  return <div>Dashboard</div>
+  return <div className="flex justify-center">Dashboard</div>
 }
