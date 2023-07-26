@@ -52,7 +52,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Thanks to the developers of Next.js, NextAuth.js, Prisma, and Pscale for their incredible tools and frameworks.
 - UI inspiration from [Shadcn](https://github.com/shadcn-ui)
-
-## Contact
-
-For any inquiries or feedback, please contact the project maintainers at [your-email@example.com](mailto:mhamzaiqbal1998@gmail.com).
