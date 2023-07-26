@@ -10,6 +10,7 @@ import { ScrollToTop } from "@/components/Common/scroll-top"
 import { SiteFooter } from "@/components/Common/site-footer"
 import { SiteHeader } from "@/components/Header/site-header"
 import { AuthProvider } from "@/components/auth-provider"
+import ProgressProvider from "@/components/progress-indicator"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 
@@ -48,12 +49,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <AuthProvider>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              <div className="flex min-h-screen flex-col">
-                <SiteHeader items={MainNavItems} />
-                <main className="flex-1">{children}</main>
-                <SiteFooter />
-              </div>
-              <TailwindIndicator />
+              <ProgressProvider>
+                <div className="flex min-h-screen flex-col">
+                  <SiteHeader items={MainNavItems} />
+                  <main className="flex-1">{children}</main>
+                  <SiteFooter />
+                </div>
+                <TailwindIndicator />
+              </ProgressProvider>
             </ThemeProvider>
             <ScrollToTop />
           </AuthProvider>
