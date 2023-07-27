@@ -12,4 +12,5 @@ export const siteConfig = {
   links: {
     github: "https://github.com/mHamzaIqbal1998/MasterPass",
   },
+  url: "https://masterpass.vercel.app",
 }
