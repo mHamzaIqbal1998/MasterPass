@@ -2,9 +2,8 @@
 
 import * as React from "react"
 import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
 
-import { MainNavItem } from "types"
+import { NavItemType } from "types"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { MobileNav } from "@/components/Header/mobile-nav"
@@ -13,7 +12,7 @@ import { Icons } from "@/components/icons"
 import { ThemeToggle } from "../theme-toggle"
 
 interface MainNavProps {
-  items?: MainNavItem[]
+  items?: NavItemType[]
   children?: React.ReactNode
 }
 

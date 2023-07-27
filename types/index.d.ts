@@ -1,8 +1,8 @@
-export type NavItem = {
+export type NavItemSchema = {
   title: string
   href: string
   disabled?: boolean
 }
 
-export type MainNavItem = NavItem
+export type NavItemType = NavItem
 export * from "./feature"

@@ -1,7 +1,8 @@
-import { MainNavItem } from "@/types"
+import { NavItemType } from "@/types"
 
-export const MainNavItems: MainNavItem[] = [
+export const MainNavItems: NavItemType[] = [
   { title: "Home", href: "/" },
   { title: "Features", href: "#features" },
-  { title: "Contact", href: "/Contact" },
 ]
+
+export const DashboardNavItem: NavItemType[] = [{ title: "Home", href: "/" }]
