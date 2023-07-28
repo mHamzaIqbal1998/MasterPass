@@ -9,6 +9,8 @@ import { UserAuthForm } from "@/components/user-auth-form"
 
 export const metadata: Metadata = loginMeta
 
+export const runtime = "edge"
+
 export default async function LoginPage() {
   return (
     <section className="space-y-6 pb-8  pt-[25%] sm:pt-[15%] md:pb-12 lg:py-32 lg:pt-[12%]">
