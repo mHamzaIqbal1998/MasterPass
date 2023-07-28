@@ -10,6 +10,7 @@ import { UserAuthForm } from "@/components/user-auth-form"
 export const metadata: Metadata = loginMeta
 
 export const runtime = "edge"
+export const dynamic = "force-dynamic"
 
 export default async function LoginPage() {
   return (
