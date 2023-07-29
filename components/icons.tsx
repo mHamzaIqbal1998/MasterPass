@@ -4,6 +4,7 @@ import {
   ChevronLeft,
   ChevronRight,
   CreditCard,
+  File,
   FileText,
   Github,
   HelpCircle,
