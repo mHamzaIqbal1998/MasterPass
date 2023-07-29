@@ -7,8 +7,6 @@ import { buttonVariants } from "@/components/ui/button"
 import { Icons } from "@/components/icons"
 import { UserAuthForm } from "@/components/user-auth-form"
 
-export const runtime = "edge"
-
 export const metadata: Metadata = loginMeta
 
 export default async function LoginPage() {

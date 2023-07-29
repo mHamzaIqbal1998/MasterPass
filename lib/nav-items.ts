@@ -1,8 +1,19 @@
-import { NavItemType } from "@/types"
+import { NavItemType, SidebarNavItem } from "@/types"
 
 export const MainNavItems: NavItemType[] = [
   { title: "Home", href: "/" },
   { title: "Features", href: "#features" },
 ]
 
-export const DashboardNavItem: NavItemType[] = [{ title: "Home", href: "/" }]
+export const dashboardSideItems: SidebarNavItem[] = [
+  {
+    title: "Manage Password",
+    href: "/dashboard",
+    icon: "folder",
+  },
+  {
+    title: "Save Password",
+    href: "/dashboard/encrypt",
+    icon: "save",
+  },
+]
