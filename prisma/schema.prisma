@@ -43,6 +43,21 @@ model Session {
   @@map(name: "sessions")
 }
 
+model SavedPasswords {
+  id                   String    @id @default(cuid())
+  website              String?
+  username             String?
+  email                String?
+  userId               String
+  encryptedPassword    String    @db.Text
+  createdAt            DateTime  @default(now()) @map(name: "created_at")
+  updatedAt            DateTime  @default(now()) @map(name: "updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map(name: "savedpasswords")
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -54,6 +69,7 @@ model User {
 
   accounts Account[]
   sessions Session[]
+  savedpasswords SavedPasswords[]
 
   @@map(name: "users")
 }
