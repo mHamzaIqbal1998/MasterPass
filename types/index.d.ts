@@ -24,3 +24,4 @@ export type SidebarNavItem = {
 
 export type NavItemType = NavItem
 export * from "./feature"
+export * from "./encrypt-form"
