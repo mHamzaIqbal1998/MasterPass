@@ -1,5 +1,7 @@
 import * as z from "zod"
 
+import { PASSWORD_MIN_LENGTH } from "@/lib/Constants"
+
 export const formSchema = z.object({
   website: z
     .string()
@@ -28,4 +30,10 @@ export const formSchema = z.object({
       })
       .optional()
   ),
+})
+
+export const masterPassSchema = z.object({
+  masterPassword: z.coerce.string().min(8, {
+    message: PASSWORD_MIN_LENGTH,
+  }),
 })

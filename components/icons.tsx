@@ -4,6 +4,8 @@ import {
   ChevronLeft,
   ChevronRight,
   CreditCard,
+  Eye,
+  EyeOff,
   File,
   FileLock,
   FileText,
@@ -53,6 +55,8 @@ export const Icons = {
   laptop: Laptop,
   gitHub: Github,
   password: FileLock,
+  eyeOff: EyeOff,
+  eyeOn: Eye,
   save: ({ ...props }: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"
