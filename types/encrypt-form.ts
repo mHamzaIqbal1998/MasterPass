@@ -11,10 +11,12 @@ export const formSchema = z.object({
     .optional(),
   username: z
     .string()
+    .min(1, {
+      message: "username required",
+    })
     .max(20, {
       message: "Too length username.",
-    })
-    .optional(),
+    }),
   encryptedPassword: z.string().min(8, {
     message: "Password must be 8 character long.",
   }),

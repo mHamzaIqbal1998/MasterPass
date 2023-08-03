@@ -1,9 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useRouter } from "next/router"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { EyeOff } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
@@ -27,7 +25,6 @@ import EncryptDIalog from "./encrypt-dialog"
 export const EncryptionForm = () => {
   const [selectedAction, SetSelectedAction] = useState<actions>(actions.encrypt)
   const [isPasswordShow, SetPasswordShow] = useState<boolean>(false)
-
   const [isReady, setIsReady] = useState(false)
 
   useEffect(() => {
@@ -43,6 +40,7 @@ export const EncryptionForm = () => {
     },
   })
 
+  const [isTouched, setIsTouched] = useState<boolean>(true)
   const [isEncrypted, SetEncrypted] = useState<boolean>(false)
   const [canEncrypted, SetCanEncrypted] = useState<boolean>(false)
 
@@ -54,22 +52,29 @@ export const EncryptionForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form.watch("encryptedPassword")])
 
-  function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.stopPropagation()
-    event.preventDefault()
-    console.log(event)
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    if (isEncrypted && form.getValues("username").length > 0) {
+      console.log(values)
+    }
   }
 
   const setPassword = (Password: string) => {
     form.setValue("encryptedPassword", Password)
+    setIsTouched(false)
+    SetEncrypted(true)
   }
+
+  useEffect(() => {
+    if (isTouched) SetEncrypted(false)
+
+    setIsTouched(true)
+  }, [form.watch("encryptedPassword")])
 
   return (
     <Form {...form}>
       <Card>
         <form
-          // onSubmit={form.handleSubmit(onSubmit)}
-          onSubmit={onSubmit}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="p-6 lg:w-3/5 xl:w-2/5 "
         >
           <div className="grid gap-6 pb-6">
@@ -78,7 +83,7 @@ export const EncryptionForm = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Username *</FormLabel>
                   <FormControl>
                     <Input placeholder="username" {...field} />
                   </FormControl>
@@ -117,7 +122,7 @@ export const EncryptionForm = () => {
               name="encryptedPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Password * </FormLabel>
                   <FormControl>
                     <div className="flex items-center">
                       <Input
@@ -150,6 +155,7 @@ export const EncryptionForm = () => {
                 canEncrypt={canEncrypted}
                 setPassword={setPassword}
                 action={selectedAction}
+                isEncrypted={isEncrypted}
               />
             )}
             <Button type="submit" disabled={!isEncrypted}>

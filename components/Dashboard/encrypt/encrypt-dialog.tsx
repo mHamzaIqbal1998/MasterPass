@@ -35,6 +35,7 @@ interface Props {
   canEncrypt: boolean
   setPassword: (Password: string) => void
   action: actions
+  isEncrypted: boolean
 }
 
 const EncryptDIalog = ({
@@ -42,6 +43,7 @@ const EncryptDIalog = ({
   canEncrypt,
   setPassword,
   action,
+  isEncrypted,
 }: Props) => {
   const [isOpen, SetOpen] = useState(false)
   const form = useForm<z.infer<typeof masterPassSchema>>({
@@ -99,7 +101,7 @@ const EncryptDIalog = ({
     <Dialog open={isOpen} onOpenChange={SetOpen} defaultOpen={false}>
       <DialogTrigger>
         <Button
-          disabled={!canEncrypt}
+          disabled={!canEncrypt || isEncrypted}
           onClick={() => {
             SetOpen(true)
           }}
