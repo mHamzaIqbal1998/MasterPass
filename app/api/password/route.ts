@@ -55,12 +55,19 @@ export async function POST(req: Request) {
       },
     })
 
-    return new Response(JSON.stringify(savedPassword))
+    return new Response(
+      JSON.stringify({ message: "Successfully Saved the password" }),
+      { status: 201 }
+    )
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 })
+      return new Response(JSON.stringify({ message: error.issues }), {
+        status: 422,
+      })
     }
 
-    return new Response(null, { status: 500 })
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+    })
   }
 }
