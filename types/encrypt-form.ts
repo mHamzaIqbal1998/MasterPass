@@ -39,3 +39,12 @@ export const masterPassSchema = z.object({
     message: PASSWORD_MIN_LENGTH,
   }),
 })
+
+export const passwordTableSchema = z.object({
+  id: z.string(),
+  username: z.string(),
+  updatedAt: z.string(),
+  encryptedPassword: z.string(),
+})
+
+export type PasswordTableType = z.infer<typeof passwordTableSchema>
