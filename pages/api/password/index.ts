@@ -10,13 +10,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  // POST: /api/password Save password
   if (req.method === "POST") {
     try {
+      // checking authorization
       const session = await getServerSession(req, res, authOptions)
-
       if (!session) {
         return res.status(403).send({ message: "Unauthorized" })
       }
+
       const { user } = session
 
       const json = await req.body
@@ -42,78 +44,34 @@ export default async function handler(
       }
       return res.status(500).send({ message: "Internal Server Error" })
     }
+    // GET: /api/password get saved passwords
   } else if (req.method === "GET") {
-    // Handle any other HTTP method
+    const session = await getServerSession(req, res, authOptions)
+    if (!session) {
+      return res.status(403).send({ message: "Unauthorized" })
+    }
+
+    const { user } = session
+
+    try {
+      const posts = await db.savedPasswords.findMany({
+        select: {
+          id: true,
+          username: true,
+          updatedAt: true,
+          encryptedPassword: true,
+        },
+        where: {
+          userId: user.id,
+        },
+      })
+
+      return res.status(200).send(JSON.stringify(posts))
+    } catch (error) {
+      return res.status(500).send({ message: "Internal Server Error" })
+    }
   } else {
+    // neither GET nor POST
     return res.status(404).send({ message: "Not found" })
   }
 }
-
-// export async function GET() {
-//   try {
-//     const session = await getServerSession(authOptions)
-
-//     if (!session) {
-//       return new Response("Unauthorized", { status: 403 })
-//     }
-
-//     const { user } = session
-//     const posts = await db.savedPasswords.findMany({
-//       select: {
-//         id: true,
-//         username: true,
-//         updatedAt: true,
-//         encryptedPassword: true,
-//       },
-//       where: {
-//         userId: user.id,
-//       },
-//     })
-
-//     return new Response(JSON.stringify(posts))
-//   } catch (error) {
-//     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-//       status: 500,
-//     })
-//   }
-// }
-
-// export async function POST(req: Request) {
-//   try {
-//     const session = await getServerSession(authOptions)
-
-//     if (!session) {
-//       return new Response("Unauthorized", { status: 403 })
-//     }
-//     const { user } = session
-
-//     const json = await req.json()
-//     const { encryptedPassword, ...reqData } = savePasswordSchema.parse(json)
-
-//     const savedPassword = await db.savedPasswords.create({
-//       data: {
-//         encryptedPassword,
-//         userId: user.id,
-//         ...reqData,
-//       },
-//       select: {
-//         id: true,
-//       },
-//     })
-
-//     return new Response(
-//       JSON.stringify({ message: "Successfully Saved the password" }),
-//       { status: 201 }
-//     )
-//   } catch (error) {
-//     if (error instanceof z.ZodError) {
-//       return new Response(JSON.stringify({ message: error.issues }), {
-//         status: 422,
-//       })
-//     }
-
-//     return new Response(JSON.stringify({ message: "Internal Server Error" }), {
-//       status: 500,
-//     })
-//   }
-// }

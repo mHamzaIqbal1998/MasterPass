@@ -21,10 +21,10 @@ export const PasswordTableColumns: ColumnDef<PasswordTableType>[] = [
   },
   {
     accessorKey: "updatedAt",
-    header: "Updated At",
+    header: "Last Updated",
     cell: ({ row }) => {
       return moment(
-        moment(row.original.updatedAt).utc(true).format("LLLL")
+        moment(row.original.updatedAt).utc(true).format("YYYY-MM-DD HH:mm:ss")
       ).fromNow()
     },
   },

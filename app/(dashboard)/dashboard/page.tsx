@@ -1,3 +1,5 @@
+import { headers } from "next/headers"
+
 import { EmptyPlaceholder } from "@/components/Common/empty-placeholder"
 import { PasswordTableColumns } from "@/components/Dashboard/Table/columns"
 import { PasswordTable } from "@/components/Dashboard/Table/password-table"
@@ -10,12 +12,16 @@ export const metadata = {
 }
 
 async function getData() {
-  const res = await import("../../api/password/_route")
-
-  const data = await await res.GET()
-
+  const host = headers().get("host")
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https"
+  let data = await fetch(`${protocal}://${host}/api/password`, {
+    method: "GET",
+    // @ts-ignore
+    headers: headers(),
+    cache: "no-store",
+  })
   if (!data.ok) {
-    console.log(res)
+    console.log(data.statusText)
   }
 
   return data.json()

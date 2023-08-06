@@ -1,14 +1,15 @@
-import { env } from "@/env.mjs"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 
+import { env } from "@/env.mjs"
 import { db } from "@/lib/db"
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db as any),
   secret: env.NEXTAUTH_SECRET,
+  jwt: { secret: env.NEXTAUTH_SECRET },
   session: {
     strategy: "jwt",
   },
