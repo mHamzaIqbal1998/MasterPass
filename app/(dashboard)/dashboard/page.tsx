@@ -10,7 +10,7 @@ export const metadata = {
 }
 
 async function getData() {
-  const res = await import("../../api/password/route")
+  const res = await import("../../api/password/_route")
 
   const data = await await res.GET()
 
