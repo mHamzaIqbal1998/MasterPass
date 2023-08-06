@@ -72,7 +72,7 @@ export const EncryptionForm = () => {
         SetLoading(true)
         const data = formSchema.parse(values)
 
-        const res = await fetch(`${env.NEXT_PUBLIC_APP_URL}/api/password`, {
+        const res = await fetch(`/api/password`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ ...data }),
