@@ -12,14 +12,10 @@ export const metadata = {
 }
 
 async function getData() {
-  const host = headers().get("host")
-  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https"
-  let data = await fetch(`${protocal}://${host}/api/password`, {
-    method: "GET",
-    // @ts-ignore
-    headers: headers(),
-    cache: "no-store",
-  })
+  const res = await import("../../api/password/_route")
+
+  const data = await await res.GET()
+
   if (!data.ok) {
     console.log(data.statusText)
   }
