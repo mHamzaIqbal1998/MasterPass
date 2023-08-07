@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { PasswordTableType } from "@/types"
 import { ColumnDef } from "@tanstack/react-table"
 import { MoreHorizontal } from "lucide-react"
@@ -69,7 +70,11 @@ export const PasswordTableColumns: ColumnDef<PasswordTableType>[] = [
               Copy username
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View Password</DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href={`/dashboard/save/decrypt/${password.id}`}>
+                View Password
+              </Link>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       )

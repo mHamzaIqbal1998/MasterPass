@@ -13,7 +13,7 @@ export const dashboardSideItems: SidebarNavItem[] = [
   },
   {
     title: "Save Password",
-    href: "/dashboard/encrypt",
+    href: "/dashboard/save/encrypt",
     icon: "save",
   },
 ]

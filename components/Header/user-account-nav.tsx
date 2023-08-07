@@ -43,7 +43,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           <Link href="/dashboard">Manage Passwords</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/dashboard/encrypt">Save Password</Link>
+          <Link href="/dashboard/save?action=encrypt">Save Password</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem

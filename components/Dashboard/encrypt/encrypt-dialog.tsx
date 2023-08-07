@@ -36,6 +36,8 @@ interface Props {
   setPassword: (Password: string) => void
   action: actions
   isEncrypted: boolean
+  canDecrypt: boolean
+  SetCanDecrypt: (canDecrypt: boolean) => void
 }
 
 const EncryptDIalog = ({
@@ -44,8 +46,11 @@ const EncryptDIalog = ({
   setPassword,
   action,
   isEncrypted,
+  canDecrypt,
+  SetCanDecrypt,
 }: Props) => {
   const [isOpen, SetOpen] = useState(false)
+
   const form = useForm<z.infer<typeof masterPassSchema>>({
     resolver: zodResolver(masterPassSchema),
     defaultValues: {
@@ -78,6 +83,7 @@ const EncryptDIalog = ({
     let decrypted = CryptoJS.AES.decrypt(encryptedPassword, masterPassword)
     let decryptedPassword = decrypted.toString(CryptoJS.enc.Utf8)
     setPassword(decryptedPassword)
+    SetCanDecrypt(false)
     return true
   }
 
@@ -101,12 +107,16 @@ const EncryptDIalog = ({
     <Dialog open={isOpen} onOpenChange={SetOpen} defaultOpen={false}>
       <DialogTrigger>
         <Button
-          disabled={!canEncrypt || isEncrypted}
+          disabled={
+            action === actions.encrypt
+              ? !canEncrypt || isEncrypted
+              : !canDecrypt
+          }
           onClick={() => {
             SetOpen(true)
           }}
         >
-          Encrypt
+          {action === actions.encrypt ? "Encrypt" : "Decrypt"}
         </Button>
       </DialogTrigger>
       <DialogPortal container={document.body}>
@@ -140,9 +150,7 @@ const EncryptDIalog = ({
                 />
                 <DialogFooter>
                   <Button type="button" className="mt-6" onClick={onSubmit}>
-                    {action === actions.encrypt
-                      ? actions.encrypt
-                      : actions.decrypt}
+                    {action === actions.encrypt ? "Encrypt" : "Decrypt"}
                   </Button>
                 </DialogFooter>
               </Form>

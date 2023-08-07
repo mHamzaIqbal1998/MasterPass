@@ -11,7 +11,7 @@ interface SavePasswordButton extends ButtonProps {}
 export function SavePasswordButton({ className, variant }: SavePasswordButton) {
   return (
     <Link
-      href={"/dashboard/encrypt"}
+      href={"/dashboard/save/encrypt"}
       className={cn(buttonVariants({ variant }), className)}
     >
       <Icons.add className="mr-2 h-4 w-4" />
