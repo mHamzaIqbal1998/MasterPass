@@ -7,7 +7,6 @@ import { AlertCircle } from "lucide-react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 
-import { env } from "@/env.mjs"
 import { formSchema } from "@/types/encrypt-form"
 import { actions } from "@/lib/Constants"
 import { Button } from "@/components/ui/button"
@@ -15,6 +14,7 @@ import { Card } from "@/components/ui/card"
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,14 +32,52 @@ enum alertType {
   "success" = 1,
   "error" = 2,
 }
-export const EncryptionForm = () => {
-  const [selectedAction, SetSelectedAction] = useState<actions>(actions.encrypt)
+
+type props = {
+  action: actions
+  id?: string
+}
+type formType = z.infer<typeof formSchema>
+
+export const EncryptionForm = ({ action, id }: props) => {
+  const Id = id
+  const [selectedAction, SetSelectedAction] = useState<actions>(action)
   const [isPasswordShow, SetPasswordShow] = useState<boolean>(false)
   const [isReady, setIsReady] = useState(false)
   const [alert, SetAlert] = useState<alertType>(alertType.none)
   const [alertMessage, SetAlertMessage] = useState<string>("")
   const [loading, SetLoading] = useState<boolean>(false)
+  const [passwordDetails, setPasswordDetails] = useState<formType>()
   const router = useRouter()
+
+  const fetchDetails = async (id: string) => {
+    try {
+      const res = await fetch(`/api/password/${id}`, {
+        method: "GET",
+      })
+
+      if (!res?.ok) {
+        throw new Error("Error fetching data")
+      }
+
+      const data = await formSchema.parse(await res.json())
+
+      setPasswordDetails(data)
+      form.setValue("email", data?.email)
+      form.setValue("encryptedPassword", data?.encryptedPassword)
+      form.setValue("username", data?.username)
+      form.setValue("website", data?.website)
+    } catch (error) {
+      console.log(error)
+      throw new Error("Something went wrong")
+    }
+  }
+
+  useEffect(() => {
+    if (Id) {
+      fetchDetails(Id)
+    }
+  }, [Id])
 
   useEffect(() => {
     setIsReady(true)
@@ -57,6 +95,9 @@ export const EncryptionForm = () => {
   const [isTouched, setIsTouched] = useState<boolean>(true)
   const [isEncrypted, SetEncrypted] = useState<boolean>(false)
   const [canEncrypted, SetCanEncrypted] = useState<boolean>(false)
+  const [canDecrypt, SetCanDecrypt] = useState<boolean>(
+    action === actions.decrypt
+  )
 
   useEffect(() => {
     form.getValues("encryptedPassword").length > 8
@@ -197,6 +238,13 @@ export const EncryptionForm = () => {
                         </div>
                       </FormControl>
                       <FormMessage />
+                      {action === actions.decrypt && !canDecrypt && (
+                        <FormDescription>
+                          Incase your password doesn&apos;t appear in password
+                          field after decryption your master password is
+                          incorrect try to refresh and decrypt again.
+                        </FormDescription>
+                      )}
                     </FormItem>
                   )}
                 />
@@ -209,11 +257,17 @@ export const EncryptionForm = () => {
                     setPassword={setPassword}
                     action={selectedAction}
                     isEncrypted={isEncrypted}
+                    canDecrypt={canDecrypt}
+                    SetCanDecrypt={SetCanDecrypt}
                   />
                 )}
-                <Button type="submit" disabled={!isEncrypted}>
-                  Submit
-                </Button>
+                {selectedAction === actions.encrypt ? (
+                  <Button type="submit" disabled={!isEncrypted}>
+                    Submit
+                  </Button>
+                ) : (
+                  ""
+                )}
               </div>
             </form>
           </Card>
