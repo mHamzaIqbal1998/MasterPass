@@ -1,9 +1,5 @@
-import { headers } from "next/headers"
-
 import { EmptyPlaceholder } from "@/components/Common/empty-placeholder"
-import { PasswordTableColumns } from "@/components/Dashboard/Table/columns"
 import { Password } from "@/components/Dashboard/Table/password-listing"
-import { PasswordTable } from "@/components/Dashboard/Table/password-table"
 import { DashboardHeader } from "@/components/Dashboard/dashboard-header"
 import { DashboardShell } from "@/components/Dashboard/dashboard-shell"
 import { SavePasswordButton } from "@/components/Dashboard/save-password-btn"
@@ -33,7 +29,6 @@ export default async function Dashboard() {
       </DashboardHeader>
       <div>
         {passwords?.length ? (
-          // <PasswordTable columns={PasswordTableColumns} data={passwords} />
           <div className="divide-y divide-border rounded-md border">
             {passwords.map((password) => (
               <Password password={password} key={password.id} />

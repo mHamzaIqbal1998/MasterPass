@@ -77,6 +77,7 @@ export const EncryptionForm = ({ action, id }: props) => {
     if (Id) {
       fetchDetails(Id)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [Id])
 
   useEffect(() => {
