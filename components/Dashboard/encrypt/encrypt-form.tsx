@@ -132,6 +132,7 @@ export const EncryptionForm = ({ action, id }: props) => {
           SetAlert(alertType.none)
           SetAlertMessage("")
           router.replace("/dashboard")
+          router.refresh()
         }, 3000)
       } catch (error) {
         SetAlert(alertType.error)
