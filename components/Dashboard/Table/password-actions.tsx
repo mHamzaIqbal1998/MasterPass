@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 
 import {
@@ -61,6 +62,10 @@ export function PasswordActions({ username, id }: Props) {
             onClick={() => navigator.clipboard.writeText(username)}
           >
             Copy username
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            <Link href={`/dashboard/save/decrypt/${id}`}>View Password</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
