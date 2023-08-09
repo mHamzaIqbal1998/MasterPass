@@ -126,7 +126,7 @@ export const EncryptionForm = ({ action, id }: props) => {
 
         const { message } = await res.json()
         SetAlert(alertType.success)
-        SetAlertMessage(message)
+        SetAlertMessage(message + " redirecting in 3s.")
         form.reset()
         SetLoading(false)
         setTimeout(() => {
@@ -266,6 +266,18 @@ export const EncryptionForm = ({ action, id }: props) => {
                 {selectedAction === actions.encrypt ? (
                   <Button type="submit" disabled={!isEncrypted}>
                     Submit
+                  </Button>
+                ) : (
+                  ""
+                )}
+                {selectedAction === actions.decrypt ? (
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      router.replace("/dashboard")
+                    }}
+                  >
+                    Exit
                   </Button>
                 ) : (
                   ""
